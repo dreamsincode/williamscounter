@@ -4,7 +4,7 @@
   <script type='text/javascript'>
     var one_day = 1000*60*60*24;
     var div = document.getElementById('count');
-    var daily_max = 20;
+    var daily_max = 272;
     var i = 0;
     var days_since_start = 0;
     var start_date = new Date();
@@ -33,7 +33,7 @@
       var now = new Date();
       if (isPastStartDate()) {
         if (i < daily_max) {
-          i = Math.floor((now - continue_incrementing_at ) / 1000);
+          i = Math.floor((now - continue_incrementing_at ) / 300000);
           if (i < 0) i = 0;
           if (i > daily_max) i = daily_max;
 	  if (days_since_start > 0); 
