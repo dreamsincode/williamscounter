@@ -1,0 +1,50 @@
+<html><body>
+  <div id="count"></div>
+  
+  <script type='text/javascript'>
+    var one_day = 1000*60*60*24;
+    var div = document.getElementById('count');
+    var daily_max = 20;
+    var i = 0;
+    var days_since_start = 0;
+    var start_date = new Date();
+    start_date.setHours(0,0,0,0);
+    start_date.setMonth(0);
+    start_date.setDate(1);
+    start_date.setFullYear(2017);
+    // Begin incrementing again at Midnight each night
+    var continue_incrementing_at = new Date();
+    continue_incrementing_at.setHours(0,0,0,0);
+    // I moved this into a function so that the clock will start ticking 
+    // at the start_date without a browser refresh
+    function update_days_since_start() {
+      var today = new Date();
+      days_since_start = Math.round((today - start_date) / one_day);
+    }
+    function isPastStartDate() {
+      update_days_since_start();
+      if (days_since_start >= 0) {
+        return true;
+      } else {
+        return false;
+      } 
+    }
+    function updateCount() {
+      var now = new Date();
+      if (isPastStartDate()) {
+        if (i < daily_max) {
+          i = Math.floor((now - continue_incrementing_at ) / 1000);
+          if (i < 0) i = 0;
+          if (i > daily_max) i = daily_max;
+	  if (days_since_start > 0); 
+        }
+        // No longer clearing the interval so that window can stay open multiple days
+        div.innerHTML = i + (days_since_start * daily_max);
+      } else {
+        div.innerHTML = "Check back January 1, 2017.";
+      }
+    }
+    var interval = setInterval(updateCount, 1000);
+    updateCount();
+  </script>
+</body></html>
